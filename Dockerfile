@@ -6,7 +6,7 @@ RUN ["mvn", "dependency:resolve"]
 RUN ["mvn", "verify"]
 
 COPY src /code/src
-RUN ["mvn", "package"]
+RUN ["mvn", "clean", "package"]
 
-EXPOSE 1234
+EXPOSE 9000
 CMD ["java", "-jar", "target/shop-1.0-jar-with-dependencies.jar"]
