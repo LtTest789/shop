@@ -9,4 +9,4 @@ COPY src /code/src
 RUN ["mvn", "clean", "package"]
 
 EXPOSE 9000
-CMD ["java", "-jar", "target/shop-1.0-jar-with-dependencies.jar"]
+CMD ["java", "-jar", "target/shop-1.0.jar"]
