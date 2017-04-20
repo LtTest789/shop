@@ -9,10 +9,12 @@ Paleisti Programa:
 Rest Endpoints:
  
   GET
+  
     /shop/retrieveItem/{id} -> gauti viena prekę 'item' įrašą id prekės numeris
     /shop/items -> gauti visas prekes 'items'
     
   POST
+  
     shop/add -> pridėti prekę 'item'
     {
     "itemName": "Mouse",
@@ -23,6 +25,7 @@ Rest Endpoints:
      }
      
   PUT
+  
     /shop/updateItem/{id} -> atnaujinti prekės įrašą, id prekės numeris
     {
     "itemName": "NameUpdated",
