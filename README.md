@@ -1,13 +1,13 @@
 # shop
 Parsiusti git repozitorija:
 
-  git clone https://github.com/LtTest789/shop.git
+      git clone https://github.com/LtTest789/shop.git
   
 Paleisti Programa:
 
-  docker build -t shop:latest .
-  
-  docker run -d -p 9000:9000 shop:latest
+      docker build -t shop:latest .
+
+      docker run -d -p 9000:9000 shop:latest
   
 Rest Endpoints:
  
