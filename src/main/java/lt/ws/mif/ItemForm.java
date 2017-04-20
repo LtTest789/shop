@@ -2,8 +2,6 @@ package lt.ws.mif;
 
 import javax.validation.constraints.Size;
 import java.io.Serializable;
-import java.time.LocalDate;
-import java.time.LocalDateTime;
 
 /**
  * Created by Romas on 2/11/2017.
@@ -17,9 +15,20 @@ public class ItemForm implements Serializable {
 
     private String countryOfManufactor;
 
-    private LocalDate dateOfManufactor;
+    private String dateOfManufactor;
 
     private Long price;
+
+    public ItemForm() {
+    }
+
+    public ItemForm(ItemEntity item) {
+        this.itemName = item.getItemName();
+        this.description = item.getDescription();
+        this.countryOfManufactor = item.getCountryOfManufacturing();
+        this.dateOfManufactor = item.getDateOfManufacturing().toString();
+        this.price = item.getPrice();
+    }
 
     public String getItemName() {
         return itemName;
@@ -45,11 +54,11 @@ public class ItemForm implements Serializable {
         this.countryOfManufactor = countryOfManufactor;
     }
 
-    public LocalDate getDateOfManufactor() {
+    public String getDateOfManufactor() {
         return dateOfManufactor;
     }
 
-    public void setDateOfManufactor(LocalDate dateOfManufactor) {
+    public void setDateOfManufactor(String dateOfManufactor) {
         this.dateOfManufactor = dateOfManufactor;
     }
 

@@ -8,9 +8,9 @@ import java.util.List;
 public interface ItemService {
     boolean saveItem(ItemForm itemForm);
 
-    List<ItemEntity> retrieveAllItems();
+    List<ItemForm> retrieveAllItems();
 
-    ItemEntity retrieveItem(Long itemId);
+    ItemForm retrieveItem(Long itemId);
 
     boolean deleteItem(Long itemId);
 

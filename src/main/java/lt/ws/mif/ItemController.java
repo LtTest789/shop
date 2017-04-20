@@ -27,12 +27,12 @@ public class ItemController {
     }
 
     @RequestMapping(path = "/items", method = RequestMethod.GET)
-    public List<ItemEntity> getAllItems() {
+    public List<ItemForm> getAllItems() {
         return itemService.retrieveAllItems();
     }
 
     @RequestMapping(path = "/retrieveItem/{id}", method = RequestMethod.GET)
-    public ItemEntity getItemById(@PathVariable("id") Long itemId) {
+    public ItemForm getItemById(@PathVariable("id") Long itemId) {
         return itemService.retrieveItem(itemId);
     }
 
