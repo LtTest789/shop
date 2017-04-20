@@ -1,9 +1,12 @@
 # shop
 Parsiusti git repozitorija:
+
   git clone 
   
 Paleisti Programa:
+
   docker build -t shop:latest .
+  
   docker run -d -p 9000:9000 shop:latest
   
 Rest Endpoints:
