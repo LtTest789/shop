@@ -8,6 +8,8 @@ import java.io.Serializable;
  */
 public class ItemForm implements Serializable {
 
+    private Long id;
+
     @Size(min = 1)
     private String itemName;
 
@@ -23,6 +25,7 @@ public class ItemForm implements Serializable {
     }
 
     public ItemForm(ItemEntity item) {
+        this.id = item.getId();
         this.itemName = item.getItemName();
         this.description = item.getDescription();
         this.countryOfManufactor = item.getCountryOfManufacturing();
@@ -68,6 +71,14 @@ public class ItemForm implements Serializable {
 
     public void setPrice(Long price) {
         this.price = price;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
 
     @Override

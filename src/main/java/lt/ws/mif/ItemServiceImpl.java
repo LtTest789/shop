@@ -78,8 +78,12 @@ public class ItemServiceImpl implements ItemService {
             updateItem.setDateOfManufacturing(LocalDate.parse(updatableForm.getDateOfManufactor(), formatter));
             updateItem.setCountryOfManufacturing(updatableForm.getCountryOfManufactor());
             updateItem.setPrice(updatableForm.getPrice());
-            itemRepository.save(updateItem);
-            return true;
+           try {
+               itemRepository.save(updateItem);
+               return true;
+           } catch (Exception e) {
+               return false;
+           }
         } else {
             return false;
         }
