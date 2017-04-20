@@ -36,4 +36,5 @@ Rest Endpoints:
     }
     
   DELETE
+  
     shop/deleteItem/{id} -> ištrinam prekę iš duomenų bazės naudojant id.
