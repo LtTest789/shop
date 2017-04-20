@@ -1,7 +1,7 @@
 # shop
 Parsiusti git repozitorija:
 
-  git clone 
+  git clone https://github.com/LtTest789/shop.git
   
 Paleisti Programa:
 
