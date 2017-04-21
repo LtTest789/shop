@@ -1,5 +1,5 @@
 # shop
-Docker images:
+Docker image parsiuntimas ir paleidimas:
 
       docker pull romas/shop
       docker run -d -p 9000:9000 romas/shop:latest
