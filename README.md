@@ -1,4 +1,9 @@
 # shop
+Docker images:
+      docker pull romas/shop
+      docker run -d -p 9000:9000 romas/shop:latest
+  
+
 Parsiusti git repozitorija:
 
       git clone https://github.com/LtTest789/shop.git
