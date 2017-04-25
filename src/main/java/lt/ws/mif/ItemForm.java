@@ -10,7 +10,7 @@ public class ItemForm implements Serializable {
 
     private Long id;
 
-    @Size(min = 1)
+    @Size(min = 1, message = "Item 'Name' must be at least 1 symbol long.")
     private String itemName;
 
     private String description;
@@ -25,7 +25,6 @@ public class ItemForm implements Serializable {
     }
 
     public ItemForm(ItemEntity item) {
-        this.id = item.getId();
         this.itemName = item.getItemName();
         this.description = item.getDescription();
         this.countryOfManufactor = item.getCountryOfManufacturing();

@@ -1,0 +1,4 @@
+*Resursų lentelė -> kuris prosesas kuria(atlaisvina) resursą, kuris laukia(blokuojasi). Aprašyti kokie resursai kuriami.
+*Resursų lentelėje pažymėti resursas(Dinaminis ar Statinis)
+*Sukurti resursą kuris įvykdys programos pabaigą.
+*Apsirašyti kas yra vykdymo laikas, reikalingas tam kad Virtuali mašina nepakliūtų į Deadlock'ą.

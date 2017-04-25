@@ -2,8 +2,10 @@ package lt.ws.mif;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
 import java.util.List;
 
@@ -17,40 +19,45 @@ public class ItemController {
     @Autowired
     private ItemService itemService;
 
-
-    @RequestMapping(path = "/add", method = RequestMethod.POST)
-    public HttpStatus add(@RequestBody @Valid ItemForm itemForm) {
+    @RequestMapping(path = "/items", method = RequestMethod.POST)
+    public ResponseEntity<ItemState> add(@RequestBody @Valid ItemForm itemForm, HttpServletResponse  response) {
         if (itemService.saveItem(itemForm)) {
-            return HttpStatus.ACCEPTED;
+            response.setHeader("Item", "/shop/items");
+            return new ResponseEntity(ItemState.ITEM_ADDED_TO_DATABSE, HttpStatus.CREATED);
         }
-        return HttpStatus.NOT_ACCEPTABLE;
+        return new ResponseEntity(ItemState.ITEM_WITH_ALREADY_EXIST, HttpStatus.NOT_ACCEPTABLE);
     }
 
     @RequestMapping(path = "/items", method = RequestMethod.GET)
-    public List<ItemForm> getAllItems() {
-        return itemService.retrieveAllItems();
+    public ResponseEntity<List<ItemForm>> getAllItems() {
+        return new ResponseEntity<List<ItemForm>>(itemService.retrieveAllItems(), HttpStatus.OK);
     }
 
-    @RequestMapping(path = "/retrieveItem/{id}", method = RequestMethod.GET)
-    public ItemForm getItemById(@PathVariable("id") Long itemId) {
-        return itemService.retrieveItem(itemId);
+    @RequestMapping(path = "/items/{id}", method = RequestMethod.GET)
+    public ResponseEntity<ItemForm> getItemById(@PathVariable("id") Long itemId) {
+        ItemForm retrievedItem = itemService.retrieveItem(itemId);
+        if(retrievedItem.getId() == null) {
+            return new ResponseEntity<ItemForm>(itemService.retrieveItem(itemId), HttpStatus.NOT_FOUND);
+        }
+        return new ResponseEntity<ItemForm>(itemService.retrieveItem(itemId), HttpStatus.FOUND);
     }
 
-    @RequestMapping(path = "/deleteItem/{id}", method = RequestMethod.DELETE)
-    public HttpStatus deleteItem(@PathVariable("id") Long itemId) {
+    @RequestMapping(path = "/items/{id}", method = RequestMethod.DELETE)
+    public ResponseEntity<ItemState> deleteItem(@PathVariable("id") Long itemId) {
         if (itemService.deleteItem(itemId)) {
-            return HttpStatus.OK;
+            return new ResponseEntity<>(ItemState.ITEM_DELETED_FROM_DATABASE, HttpStatus.ACCEPTED);
         } else {
-            return HttpStatus.BAD_REQUEST;
+            return new ResponseEntity<>(ItemState.ITEM_NOT_FOUND, HttpStatus.NOT_FOUND);
         }
     }
 
-    @RequestMapping(path = "/updateItem/{id}", method = RequestMethod.PUT)
-    public HttpStatus updateItem(@PathVariable("id") Long userId, @RequestBody @Valid ItemForm itemForm) {
+    @RequestMapping(path = "/items/{id}", method = RequestMethod.PUT)
+    public ResponseEntity<ItemState> updateItem(@PathVariable("id") Long userId, @RequestBody @Valid ItemForm itemForm, HttpServletResponse response) {
         if (itemService.updateItem(userId, itemForm)) {
-            return HttpStatus.OK;
+            response.setHeader("Item", "/shop/items");
+            return new ResponseEntity<>(ItemState.ITEM_UPDATED, HttpStatus.ACCEPTED);
         } else {
-            return HttpStatus.BAD_REQUEST;
+            return new ResponseEntity<>(ItemState.ITEM_NOT_FOUND, HttpStatus.NOT_FOUND);
         }
     }
 }

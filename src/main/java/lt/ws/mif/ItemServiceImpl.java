@@ -25,6 +25,7 @@ public class ItemServiceImpl implements ItemService {
 
     @Override
     public boolean saveItem(ItemForm itemForm) {
+
         ItemEntity entity = new ItemEntity();
         entity.setItemName(itemForm.getItemName());
         entity.setDescription(itemForm.getDescription());
@@ -33,10 +34,10 @@ public class ItemServiceImpl implements ItemService {
         entity.setPrice(itemForm.getPrice());
         try {
             itemRepository.save(entity);
+            return true;
         } catch (Exception e) {
             return false;
         }
-        return true;
     }
 
     @Override

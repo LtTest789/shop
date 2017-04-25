@@ -16,7 +16,7 @@ public class ItemEntity {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
 
-    @Column(name = "item_name", nullable = false)
+    @Column(name = "item_name", nullable = false, unique = true)
     private String itemName;
 
     @Column(name = "description", nullable = false)
@@ -25,7 +25,7 @@ public class ItemEntity {
     @Column(name = "country_of_manufacturing", nullable = false)
     private String countryOfManufacturing;
 
-    @Column(name = "date_of_manufacturing", nullable = false, unique = true)
+    @Column(name = "date_of_manufacturing", nullable = false)
     private LocalDate dateOfManufacturing;
 
     @Column(name = "price", nullable = false)
@@ -41,14 +41,6 @@ public class ItemEntity {
         this.countryOfManufacturing = countryOfManufactor;
         dateOfManufacturing = dateOfManufactor;
         this.price = price;
-    }
-
-    public long getId() {
-        return id;
-    }
-
-    public void setId(long id) {
-        this.id = id;
     }
 
     public String getItemName() {
