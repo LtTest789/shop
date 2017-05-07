@@ -37,9 +37,9 @@ public class ItemController {
     public ResponseEntity<ItemForm> getItemById(@PathVariable("id") Long itemId) {
         ItemForm retrievedItem = itemService.retrieveItem(itemId);
         if(retrievedItem.getId() == null) {
-            return new ResponseEntity<ItemForm>(itemService.retrieveItem(itemId), HttpStatus.NOT_FOUND);
+            return new ResponseEntity<>(itemService.retrieveItem(itemId), HttpStatus.NOT_FOUND);
         }
-        return new ResponseEntity<ItemForm>(itemService.retrieveItem(itemId), HttpStatus.FOUND);
+        return new ResponseEntity<>(itemService.retrieveItem(itemId), HttpStatus.FOUND);
     }
 
     @RequestMapping(path = "/items/{id}", method = RequestMethod.DELETE)

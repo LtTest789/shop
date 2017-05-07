@@ -25,6 +25,7 @@ public class ItemForm implements Serializable {
     }
 
     public ItemForm(ItemEntity item) {
+        this.id = item.getId();
         this.itemName = item.getItemName();
         this.description = item.getDescription();
         this.countryOfManufactor = item.getCountryOfManufacturing();

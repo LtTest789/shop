@@ -13,6 +13,8 @@ import org.springframework.jdbc.datasource.embedded.EmbeddedDatabase;
 import org.springframework.jdbc.datasource.embedded.EmbeddedDatabaseBuilder;
 import org.springframework.jdbc.datasource.embedded.EmbeddedDatabaseType;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
+import org.springframework.web.client.RestOperations;
+import org.springframework.web.client.RestTemplate;
 
 import javax.sql.DataSource;
 
@@ -39,5 +41,10 @@ public class ShopApplication {
                 .addScript("insert-data.sql")
                 .build();
         return db;
+    }
+
+    @Bean
+    public RestOperations restOperations() {
+        return new RestTemplate();
     }
 }

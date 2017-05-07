@@ -13,7 +13,7 @@ import java.time.LocalDateTime;
 public class ItemEntity {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
     @Column(name = "item_name", nullable = false, unique = true)
@@ -22,13 +22,13 @@ public class ItemEntity {
     @Column(name = "description", nullable = false)
     private String description;
 
-    @Column(name = "country_of_manufacturing", nullable = false)
+    @Column(name = "country_of_manufacturing")
     private String countryOfManufacturing;
 
-    @Column(name = "date_of_manufacturing", nullable = false)
+    @Column(name = "date_of_manufacturing")
     private LocalDate dateOfManufacturing;
 
-    @Column(name = "price", nullable = false)
+    @Column(name = "price")
     private Long price;
 
     public ItemEntity() {
@@ -39,8 +39,23 @@ public class ItemEntity {
         this.itemName = itemName;
         this.description = description;
         this.countryOfManufacturing = countryOfManufactor;
-        dateOfManufacturing = dateOfManufactor;
+        this.dateOfManufacturing = dateOfManufactor;
         this.price = price;
+    }
+
+    public ItemEntity(WarehouseForm form) {
+        this.itemName = form.getItemName();
+        this.description = "not specified";
+        this.countryOfManufacturing = "not specified";
+        this.dateOfManufacturing = LocalDate.now();
+    }
+
+    public long getId() {
+        return id;
+    }
+
+    public void setId(long id) {
+        this.id = id;
     }
 
     public String getItemName() {
