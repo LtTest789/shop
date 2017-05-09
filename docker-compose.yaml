@@ -1,0 +1,8 @@
+version: '2'
+
+services:
+  shop:
+    image: romas/shop
+    container_name: shop
+    ports:
+     - 9090:9090
