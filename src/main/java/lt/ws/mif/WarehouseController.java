@@ -99,7 +99,7 @@ public class WarehouseController {
 
     @RequestMapping(path = "/item/{id}", method = RequestMethod.DELETE)
     public ResponseEntity<ItemStateInWarehouse> deleteWarehousesItem(@PathVariable("id") Long itemId) {
-        String targetUrl =  url + "/warehouse/items/" + String.valueOf(itemId);
+        String targetUrl =  url +"/warehouse/items/" + String.valueOf(itemId);
         HttpEntity<?> requestEntity = new HttpEntity<Object>(new HttpHeaders());
         ResponseEntity<ItemStateInWarehouse> form = restTemplate.exchange(targetUrl, HttpMethod.DELETE, requestEntity, ItemStateInWarehouse.class);
         if (ItemStateInWarehouse.ITEM_DELETED_FROM_DATABASE.equals(form)) {

@@ -1,15 +1,14 @@
 package lt.ws.mif;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.HttpClientErrorException;
 import org.springframework.web.client.RestOperations;
 
-import java.time.LocalDate;
 import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -26,12 +25,17 @@ public class WarehouseServiceImpl implements WarehouseService {
     @Autowired
     private ItemRepository itemRepository;
 
+    @Value(value = "${url.ip}")
+    private String url;
+
     final String fooResourceUrl = "http://localhost:9001/warehouse/items";
 
     @Override
     public List<WarehouseAdresses> getAllwarehouseAddress() {
-        List<WarehouseForm> returned = restTemplate.getForObject(fooResourceUrl, List.class);
-        List<WarehouseAdresses> adresses = returned.stream().map(w -> new WarehouseAdresses(w.getId(), w.getCity(), w.getStreet(), w.getNumber())).collect(Collectors.toList());
+        String uri = url + "/warehouse/items";
+        WarehouseForm[] returned = restTemplate.getForObject(uri, WarehouseForm[].class);
+        List<WarehouseForm> returnedList = Arrays.asList(returned);
+        List<WarehouseAdresses> adresses = returnedList.stream().map(w -> new WarehouseAdresses(w.getId(), w.getCity(), w.getStreet(), w.getNumber())).collect(Collectors.toList());
         return adresses;
     }
 
@@ -46,9 +50,9 @@ public class WarehouseServiceImpl implements WarehouseService {
 
     @Override
     public boolean getSpecificItemFromWarehouseToShop(Long itemId) {
-        String getItemUrl = "http://localhost:9001/warehouse/items/" + String.valueOf(itemId);
+        String uri = url + "/warehouse/items" + String.valueOf(itemId);
         try {
-            WarehouseForm form = restTemplate.getForObject(getItemUrl, WarehouseForm.class);
+            WarehouseForm form = restTemplate.getForObject(uri, WarehouseForm.class);
             ItemEntity entity = new ItemEntity(form);
             itemRepository.save(entity);
             reduceQuantity(form, itemId);
@@ -62,16 +66,16 @@ public class WarehouseServiceImpl implements WarehouseService {
     }
 
     private void reduceQuantity(WarehouseForm form, Long itemId) {
-        String targetUrl = "http://localhost:9001/warehouse/items/" + String.valueOf(itemId);
-        form.setQuantity(form.getQuantity() -1);
+        String uri = url + "/warehouse/items" + String.valueOf(itemId);
+        form.setQuantity(form.getQuantity() - 1);
         HttpEntity<WarehouseForm> requestEntity = new HttpEntity<>(form, new HttpHeaders());
-        restTemplate.exchange(targetUrl, HttpMethod.PUT, requestEntity ,ItemStateInWarehouse.class);
+        restTemplate.exchange(uri, HttpMethod.PUT, requestEntity, ItemStateInWarehouse.class);
     }
 
     @Override
     public boolean sendItemBackTospecifixWarehouse(ItemInWarehouses item) {
         ItemEntity entity = itemRepository.findOne(item.getItemId());
-        if(entity == null) {
+        if (entity == null) {
             return false;
         }
         itemRepository.delete(item.getItemId());
