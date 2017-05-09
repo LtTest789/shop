@@ -4,10 +4,10 @@ services:
   shop:
       image: "romas/shop:latest"
       ports:
-        - 80:9000
+        - 9000:9000
       depends_on:
             - warehouse
   warehouse:
     image: "romas/warehouse:latest"
     ports:
-      - 81:9001
+      - 9001:9001
