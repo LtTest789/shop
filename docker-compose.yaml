@@ -2,7 +2,12 @@ version: '2'
 
 services:
   shop:
-    image: romas/shop
-    container_name: shop
+      image: "romas/shop:latest"
+      ports:
+        - 80:9000
+      depends_on:
+            - warehouse
+  warehouse:
+    image: "romas/warehouse:latest"
     ports:
-     - 9090:9090
+      - 81:9001
