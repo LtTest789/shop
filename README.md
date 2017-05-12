@@ -45,3 +45,8 @@ Rest Endpoints:
   DELETE
   
     shop/items/{id} -> ištrinam prekę iš duomenų bazės naudojant id.
+
+
+
+    GET
+    /rest/warehouses/addresses -> gausime visų sandėlių adresus
