@@ -25,15 +25,15 @@ public class WarehouseServiceImpl implements WarehouseService {
     @Autowired
     private ItemRepository itemRepository;
 
-    @Value(value = "${url.ip}")
-    private String url;
+//    @Value(value = "${url.ip}")
+    private String url = "http://193.219.91.103:9001";
 
-    final String fooResourceUrl = "http://localhost:9001/warehouse/items";
+    final String fooResourceUrl = "http://193.219.91.103:9001/warehouse/items";
 
     @Override
     public List<WarehouseAdresses> getAllwarehouseAddress() {
         String uri = url + "/warehouse/items";
-        WarehouseForm[] returned = restTemplate.getForObject(uri, WarehouseForm[].class);
+        WarehouseForm[] returned = restTemplate.getForObject(fooResourceUrl, WarehouseForm[].class);
         List<WarehouseForm> returnedList = Arrays.asList(returned);
         List<WarehouseAdresses> adresses = returnedList.stream().map(w -> new WarehouseAdresses(w.getId(), w.getCity(), w.getStreet(), w.getNumber())).collect(Collectors.toList());
         return adresses;

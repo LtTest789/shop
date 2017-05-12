@@ -21,8 +21,8 @@ public class WarehouseController {
     @Autowired
     private RestOperations restTemplate;
 
-    @Value(value = "${url.ip}")
-    private String url;
+//    @Value(value = "${url.ip}")
+    private String url = "http://193.219.91.103:9001";
 
     @Autowired
     private WarehouseService warehouseService;
