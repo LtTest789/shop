@@ -17,12 +17,12 @@ Rest Endpoints:
  
   GET
   
-    /shop/retrieveItem/{id} -> gauti viena prekę 'item' įrašą id prekės numeris
+    /shop/items/{id} -> gauti viena prekę 'item' įrašą id prekės numeris
     /shop/items -> gauti visas prekes 'items'
     
   POST
   
-    shop/add -> pridėti prekę 'item'
+    shop/items -> pridėti prekę 'item'
     {
     "itemName": "Mouse",
     "description": "Logitect mouse 3500 Dpi",
@@ -33,7 +33,7 @@ Rest Endpoints:
      
   PUT
   
-    /shop/updateItem/{id} -> atnaujinti prekės įrašą, id prekės numeris
+    /shop/items/{id} -> atnaujinti prekės įrašą, id prekės numeris
     {
     "itemName": "NameUpdated",
     "description": "description Update",
@@ -44,4 +44,4 @@ Rest Endpoints:
     
   DELETE
   
-    shop/deleteItem/{id} -> ištrinam prekę iš duomenų bazės naudojant id.
+    shop/items/{id} -> ištrinam prekę iš duomenų bazės naudojant id.
