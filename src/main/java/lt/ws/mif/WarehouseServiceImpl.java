@@ -25,7 +25,7 @@ public class WarehouseServiceImpl implements WarehouseService {
     @Autowired
     private ItemRepository itemRepository;
 
-    private String url = "http://localhost:9001";
+    private String url = "http://warehouse:9001";
 
     final String fooResourceUrl = "http://warehouse:9001/warehouse/items";
 

@@ -21,7 +21,7 @@ public class WarehouseController {
     @Autowired
     private RestOperations restTemplate;
 
-    private String url = "http://localhost:9001";
+    private String url = "http://warehouse:9001";
 
     @Autowired
     private WarehouseService warehouseService;
