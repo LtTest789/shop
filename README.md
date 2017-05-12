@@ -2,7 +2,7 @@
 Docker image parsiuntimas ir paleidimas:
 
       docker pull romas/shop
-      docker run -d -p 9000:9000 romas/shop:latest
+      docker run -d -p 80:9000 romas/shop:latest
   
 
 Parsiusti ir paleisti programa sekite šiuos zingsnius :
@@ -11,7 +11,7 @@ Parsiusti ir paleisti programa sekite šiuos zingsnius :
 
       docker build -t shop:latest .
 
-      docker run -d -p 9000:9000 shop:latest
+      docker run -d -p 80:9000 shop:latest
   
 Rest Endpoints:
  
