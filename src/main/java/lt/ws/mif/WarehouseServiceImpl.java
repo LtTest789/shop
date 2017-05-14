@@ -25,8 +25,8 @@ public class WarehouseServiceImpl implements WarehouseService {
 
     private String url = "http://warehouse:9001";
 
-//    final String fooResourceUrl = "http://warehouse:9001/warehouse/items";
-    final String fooResourceUrl = "http://localhost:9001/warehouse/items/";
+    final String fooResourceUrl = "http://warehouse:9001/warehouse/items";
+//    final String fooResourceUrl = "http://localhost:9001/warehouse/items/";
 
 
     @Override
