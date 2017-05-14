@@ -1,39 +1,36 @@
 package lt.ws.mif;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
-
-import java.io.Serializable;
-import java.util.List;
+import com.fasterxml.jackson.annotation.JsonProperty;
 
 /**
- * Created by Romas on 5/6/2017.
+ * Created by Romas on 5/14/2017.
  */
-public class WarehouseForm implements Serializable{
+public class WarehouseInfo {
 
     @JsonInclude(JsonInclude.Include.NON_NULL)
     private Long id;
     private String city;
     private String street;
     private String number;
-    private List<ItemInfo> itemFormList;
 
-    public WarehouseForm() {
+    public WarehouseInfo() {
     }
 
-    public WarehouseForm(Long id, String city, String street, String number) {
+    public WarehouseInfo(Long id, String city, String street, String number) {
         this.id = id;
         this.city = city;
         this.street = street;
         this.number = number;
     }
 
-    public WarehouseForm(WarehouseInfo warehouseinfo) {
-        this.city = warehouseinfo.getCity();
-        this.street = warehouseinfo.getStreet();
-        this.number = warehouseinfo.getNumber();
+
+    public WarehouseInfo(WarehouseForm wf) {
+        this.id = wf.getId();
+        this.city = wf.getCity();
+        this.street = wf.getStreet();
+        this.number = wf.getNumber();
     }
-
-
 
     public Long getId() {
         return id;
@@ -68,15 +65,6 @@ public class WarehouseForm implements Serializable{
         this.number = number;
     }
 
-
-    public List<ItemInfo> getItemFormList() {
-        return itemFormList;
-    }
-
-    public void setItemFormList(List<ItemInfo> itemFormList) {
-        this.itemFormList = itemFormList;
-    }
-
     @Override
     public String toString() {
         return "WarehouseItemForm{" +
@@ -86,4 +74,5 @@ public class WarehouseForm implements Serializable{
                 ", number='" + number + '\'' +
                 '}';
     }
+
 }

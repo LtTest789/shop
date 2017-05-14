@@ -31,6 +31,7 @@ public class ItemEntity {
     @Column(name = "price")
     private Long price;
 
+
     public ItemEntity() {
     }
 
@@ -44,7 +45,6 @@ public class ItemEntity {
     }
 
     public ItemEntity(WarehouseForm form) {
-        this.itemName = form.getItemName();
         this.description = "not specified";
         this.countryOfManufacturing = "not specified";
         this.dateOfManufacturing = LocalDate.now();
@@ -97,7 +97,5 @@ public class ItemEntity {
     public void setPrice(Long price) {
         this.price = price;
     }
-
-
 
 }

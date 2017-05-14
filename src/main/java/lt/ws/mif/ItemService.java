@@ -6,7 +6,7 @@ import java.util.List;
  * Created by Romas on 2/11/2017.
  */
 public interface ItemService {
-    boolean saveItem(ItemForm itemForm);
+    Operationresponse saveItem(ItemForm itemForm);
 
     List<ItemForm> retrieveAllItems();
 
@@ -14,5 +14,5 @@ public interface ItemService {
 
     boolean deleteItem(Long itemId);
 
-    boolean updateItem(Long itemId, ItemForm itemForm);
+    Operationresponse updateItem(Long itemId, ItemForm itemForm);
 }

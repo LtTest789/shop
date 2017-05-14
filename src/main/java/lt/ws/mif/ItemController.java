@@ -20,9 +20,10 @@ public class ItemController {
     private ItemService itemService;
 
     @RequestMapping(path = "/items", method = RequestMethod.POST)
-    public ResponseEntity<ItemState> add(@RequestBody @Valid ItemForm itemForm, HttpServletResponse  response) {
-        if (itemService.saveItem(itemForm)) {
-            response.setHeader("Item", "/shop/items");
+    public ResponseEntity<ItemState> add(@RequestBody @Valid ItemForm itemForm, HttpServletResponse response) {
+        Operationresponse result = itemService.saveItem(itemForm);
+        if (result.isStatus()) {
+            response.setHeader("Item", "/shop/items/" + result.getItemId().toString());
             return new ResponseEntity(ItemState.ITEM_ADDED_TO_DATABSE, HttpStatus.CREATED);
         }
         return new ResponseEntity(ItemState.ITEM_WITH_ALREADY_EXIST, HttpStatus.NOT_ACCEPTABLE);
@@ -34,10 +35,10 @@ public class ItemController {
     }
 
     @RequestMapping(path = "/items/{id}", method = RequestMethod.GET)
-    public ResponseEntity<ItemForm> getItemById(@PathVariable("id") Long itemId) {
+    public ResponseEntity<?> getItemById(@PathVariable("id") Long itemId) {
         ItemForm retrievedItem = itemService.retrieveItem(itemId);
-        if(retrievedItem.getId() == null) {
-            return new ResponseEntity<>(itemService.retrieveItem(itemId), HttpStatus.NOT_FOUND);
+        if (retrievedItem == null) {
+            return new ResponseEntity<>(ItemStateInWarehouse.ITEM_NOT_FOUND, HttpStatus.NOT_FOUND);
         }
         return new ResponseEntity<>(itemService.retrieveItem(itemId), HttpStatus.FOUND);
     }
@@ -53,8 +54,9 @@ public class ItemController {
 
     @RequestMapping(path = "/items/{id}", method = RequestMethod.PUT)
     public ResponseEntity<ItemState> updateItem(@PathVariable("id") Long userId, @RequestBody @Valid ItemForm itemForm, HttpServletResponse response) {
-        if (itemService.updateItem(userId, itemForm)) {
-            response.setHeader("Item", "/shop/items");
+        Operationresponse result = itemService.updateItem(userId, itemForm);
+        if (result.isStatus()) {
+            response.setHeader("Item", "/shop/items/" + result.getItemId().toString());
             return new ResponseEntity<>(ItemState.ITEM_UPDATED, HttpStatus.ACCEPTED);
         } else {
             return new ResponseEntity<>(ItemState.ITEM_NOT_FOUND, HttpStatus.NOT_FOUND);

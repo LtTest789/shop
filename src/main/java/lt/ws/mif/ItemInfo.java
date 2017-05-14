@@ -1,19 +1,13 @@
 package lt.ws.mif;
 
 import javax.validation.constraints.Size;
-import java.io.Serializable;
-import java.util.List;
-import java.util.Set;
-import java.util.WeakHashMap;
 
 /**
- * Created by Romas on 2/11/2017.
+ * Created by Romas on 5/14/2017.
  */
-public class ItemForm implements Serializable {
-
+public class ItemInfo {
     private Long itemId;
 
-    @Size(min = 1, message = "Item 'Name' must be at least 1 symbol long.")
     private String itemName;
 
     private String description;
@@ -22,20 +16,31 @@ public class ItemForm implements Serializable {
 
     private String dateOfManufactor;
 
-    private List<WarehouseInfo> warehouses;
-
-    public ItemForm() {
+    public ItemInfo() {
     }
 
-    public ItemForm(ItemEntity item) {
-        this.itemId = item.getId();
-        this.itemName = item.getItemName();
-        this.description = item.getDescription();
-        this.countryOfManufactor = item.getCountryOfManufacturing();
-        this.dateOfManufactor = item.getDateOfManufacturing().toString();
+    public ItemInfo(ItemForm warehouseForms) {
+        this.itemId = warehouseForms.getItemId();
+        this.itemName = warehouseForms.getItemName();
+        this.description = warehouseForms.getDescription();
+        this.countryOfManufactor = warehouseForms.getCountryOfManufactor();
+        this.dateOfManufactor = warehouseForms.getDateOfManufactor().toString();
     }
 
-    public ItemForm(Long itemId, String itemName, String description, String dateOfManufactor, String countryOfManufactor) {
+    public ItemInfo(ItemForm warehouseForms, Long id) {
+        this.itemId = id;
+        this.itemName = warehouseForms.getItemName();
+        this.description = warehouseForms.getDescription();
+        this.countryOfManufactor = warehouseForms.getCountryOfManufactor();
+        this.dateOfManufactor = warehouseForms.getDateOfManufactor().toString();
+    }
+
+    public ItemInfo(Long itemId, String itemName, String description, String dateOfManufactor, String countryOfManufactor) {
+        this.itemId = itemId;
+        this.itemName = itemName;
+        this.description =description;
+        this.countryOfManufactor = countryOfManufactor;
+        this.dateOfManufactor = dateOfManufactor;
     }
 
     public String getItemName() {
@@ -76,14 +81,6 @@ public class ItemForm implements Serializable {
 
     public void setItemId(Long itemId) {
         this.itemId = itemId;
-    }
-
-    public List<WarehouseInfo> getWarehouses() {
-        return warehouses;
-    }
-
-    public void setWarehouses(List<WarehouseInfo> warehouses) {
-        this.warehouses = warehouses;
     }
 
     @Override
