@@ -6,6 +6,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.client.HttpClientErrorException;
 import org.springframework.web.client.RestOperations;
 
+import java.net.ConnectException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -25,8 +26,8 @@ public class WarehouseServiceImpl implements WarehouseService {
 
     private String url = "http://warehouse:9001";
 
-    final String fooResourceUrl = "http://warehouse:9001/warehouse/items";
-//    final String fooResourceUrl = "http://localhost:9001/warehouse/items/";
+//    final String fooResourceUrl = "http://warehouse:9001/warehouse/items";
+    final String fooResourceUrl = "http://localhost:9001/warehouse/items/";
 
 
     @Override
@@ -55,8 +56,12 @@ public class WarehouseServiceImpl implements WarehouseService {
 
     @Override
     public List<WarehouseForm> getAll() {
-        WarehouseForm[] returned = restTemplate.getForObject(fooResourceUrl, WarehouseForm[].class);
-        return Arrays.asList(returned);
+        try {
+            WarehouseForm[] returned = restTemplate.getForObject(fooResourceUrl, WarehouseForm[].class);
+            return Arrays.asList(returned);
+        } catch (Exception exception) {
+            return new ArrayList<>();
+        }
     }
 
     public List<WarehouseForm> getOneItem(Long id) {

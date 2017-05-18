@@ -7,7 +7,14 @@ services:
         - 80:9000
       depends_on:
             - warehouse
+            -jwt
   warehouse:
     image: "romas/warehouse:latest"
     ports:
       - 9001:9001
+      depends_on:
+            -jwt
+  jwt:
+    image: "romas/jwt:latest"
+    ports:
+      - 9003:9003

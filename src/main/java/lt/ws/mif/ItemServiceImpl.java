@@ -1,9 +1,11 @@
 package lt.ws.mif;
 
+import org.apache.coyote.http2.ConnectionException;
 import org.hibernate.engine.jdbc.spi.SqlExceptionHelper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.net.UnknownHostException;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.*;
@@ -40,7 +42,7 @@ public class ItemServiceImpl implements ItemService {
     @Override
     public List<ItemForm> retrieveAllItems() {
         List<ItemEntity> itemEntities = itemRepository.findAll();
-        List<WarehouseForm> formList = warehouseService.getAll();
+        List<WarehouseForm> formList = getWarehouseForms();
         List<ItemForm> itemForms = new ArrayList<>();
         for(ItemEntity entity : itemEntities) {
             ItemForm itemForm = new ItemForm(entity);
@@ -49,6 +51,10 @@ public class ItemServiceImpl implements ItemService {
             itemForms.add(itemForm);
         }
         return itemForms;
+    }
+
+    private List<WarehouseForm> getWarehouseForms() {
+        return warehouseService.getAll();
     }
 
     private List<WarehouseInfo> resoveItems(long id, List<WarehouseForm> forms) {
@@ -62,7 +68,7 @@ public class ItemServiceImpl implements ItemService {
     @Override
     public ItemForm retrieveItem(Long itemId) {
         ItemEntity item = itemRepository.findOne(itemId);
-        List<WarehouseForm> formList = warehouseService.getAll();
+        List<WarehouseForm> formList = getWarehouseForms();
         List<WarehouseInfo> warehouseInfos = resoveItems(itemId, formList);
         if(item == null) {
             return null;
