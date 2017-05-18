@@ -11,8 +11,7 @@ services:
     image: "romas/warehouse:latest"
     ports:
       - 9001:9001
-      depends_on:
-            -jwt
+
   jwt:
     image: "romas/jwt:latest"
     ports:
