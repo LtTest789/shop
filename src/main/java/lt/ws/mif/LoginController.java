@@ -21,7 +21,8 @@ import javax.validation.Valid;
 @RequestMapping(path = "/shop")
 public class LoginController {
 
-    final String fooResourceUrl = "http://localhost:9003/login";
+//    final String fooResourceUrl = "http://localhost:9003/login";
+    final String fooResourceUrl = "http://jwt:9003/login";
 
     @Autowired
     private RestOperations restTemplate;
@@ -32,7 +33,7 @@ public class LoginController {
         HttpEntity<Login> rt = new HttpEntity<>(login);
         try {
             String http = restTemplate.postForObject(fooResourceUrl, rt, String.class);
-            return new ResponseEntity<>("Baerer "+http, HttpStatus.OK);
+            return new ResponseEntity<>("Bearer "+http, HttpStatus.OK);
         } catch (HttpClientErrorException errorException) {
             return new ResponseEntity<>("Wrong username or password!", HttpStatus.BAD_REQUEST);
         }
