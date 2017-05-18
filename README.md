@@ -12,16 +12,32 @@ Parsiusti ir paleisti programa sekite šiuos zingsnius :
       docker build -t shop:latest .
 
       docker run -d -p 80:9000 shop:latest
-  
+
+Gauti JWT token'a:
+    POST
+        /shop/login
+
+        {
+        	"username" : "admin",
+        	"password" : "password"
+        }
+    Bus gautas atsakymas "Bearer <TOKEN>".
+
+    Tokeną pridėti prie kiekvieno Http request'o header'io "Authorization : Bearer <TOKEN>"
+
 Rest Endpoints:
  
   GET
-  
+
+    Pridėti header'i "Authorization : Bearer <TOKEN>"
+
     /shop/items/{id} -> gauti viena prekę 'item' įrašą id prekės numeris
     /shop/items -> gauti visas prekes 'items'
     
   POST
-  
+
+     Pridėti header'i "Authorization : Bearer <TOKEN>"
+
     shop/items -> pridėti prekę 'item'
     {
     "itemName": "Mouse",
@@ -32,6 +48,8 @@ Rest Endpoints:
      }
      
   PUT
+
+     Pridėti header'i "Authorization : Bearer <TOKEN>"
   
     /shop/items/{id} -> atnaujinti prekės įrašą, id prekės numeris
     {
@@ -43,10 +61,8 @@ Rest Endpoints:
     }
     
   DELETE
-  
+
+    Pridėti header'i "Authorization : Bearer <TOKEN>"
+
     shop/items/{id} -> ištrinam prekę iš duomenų bazės naudojant id.
 
-
-
-    GET
-    /rest/warehouses/addresses -> gausime visų sandėlių adresus
