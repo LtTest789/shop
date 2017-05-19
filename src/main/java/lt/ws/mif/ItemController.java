@@ -32,7 +32,7 @@ public class ItemController {
                 response.setHeader("Item", "/shop/items/" + result.getItemId().toString());
                 return new ResponseEntity(ItemState.ITEM_ADDED_TO_DATABSE, HttpStatus.CREATED);
             }
-            return new ResponseEntity(ItemState.ITEM_WITH_ALREADY_EXIST, HttpStatus.NOT_ACCEPTABLE);
+            return new ResponseEntity(ItemState.ITEM_ALREADY_EXIST, HttpStatus.NOT_ACCEPTABLE);
         }
         throw new TokenException("Invalid JWT token!");
     }

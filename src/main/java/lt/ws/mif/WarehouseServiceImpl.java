@@ -26,8 +26,8 @@ public class WarehouseServiceImpl implements WarehouseService {
 
     private String url = "http://warehouse:9001";
 
-//    final String fooResourceUrl = "http://warehouse:9001/warehouse/items";
-    final String fooResourceUrl = "http://localhost:9001/warehouse/items/";
+    final String fooResourceUrl = "http://warehouse:9001/warehouse/items";
+//    final String fooResourceUrl = "http://localhost:9001/warehouse/items/";
 
 
     @Override
@@ -44,13 +44,15 @@ public class WarehouseServiceImpl implements WarehouseService {
 
     private void resolveWarehouses(ItemForm warehouseForms) {
         ItemStateInWarehouse entityState = ItemStateInWarehouse.FAILED_ADD_ITEM_TO_WAREHOUSE;
-        for(WarehouseInfo warehouseinfo: warehouseForms.getWarehouses()) {
-            WarehouseForm warehouseForm = new WarehouseForm(warehouseinfo);
-            List<ItemInfo> tmpList = new ArrayList<>();
-            tmpList.add(new ItemInfo(warehouseForms));
-            warehouseForm.setItemFormList(tmpList);
-            HttpEntity<WarehouseForm> request = new HttpEntity<>(warehouseForm);
-            entityState = restTemplate.postForObject(fooResourceUrl, request, ItemStateInWarehouse.class);
+        if(warehouseForms.getWarehouses() != null) {
+            for (WarehouseInfo warehouseinfo : warehouseForms.getWarehouses()) {
+                WarehouseForm warehouseForm = new WarehouseForm(warehouseinfo);
+                List<ItemInfo> tmpList = new ArrayList<>();
+                tmpList.add(new ItemInfo(warehouseForms));
+                warehouseForm.setItemFormList(tmpList);
+                HttpEntity<WarehouseForm> request = new HttpEntity<>(warehouseForm);
+                entityState = restTemplate.postForObject(fooResourceUrl, request, ItemStateInWarehouse.class);
+            }
         }
     }
 

@@ -13,7 +13,7 @@ import org.springframework.web.client.RestOperations;
 @Service
 public class LoginServiceImpl implements LoginService {
 
-//    final String fooResourceUrl = "http://jwt:9003/auth";
+//    final String fooResourceUrl = "http://localhost:9003/auth";
     final String fooResourceUrl = "http://jwt:9003/auth";
 
     @Autowired

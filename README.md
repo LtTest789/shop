@@ -39,12 +39,17 @@ Rest Endpoints:
      Pridėti header'i "Authorization : Bearer <TOKEN>"
 
     shop/items -> pridėti prekę 'item'
-    {
-    "itemName": "Mouse",
-    "description": "Logitect mouse 3500 Dpi",
-    "countryOfManufactor" : "Vietnam",
-    "dateOfManufactor" : "2013-12-5",
-    "price": 444
+      {
+        "itemName": "Nauja preke",
+        "description": "Aprasymas,
+        "countryOfManufactor": "Salis",
+        "dateOfManufactor" : "2016-12-12",
+        "warehouses" : [
+         {
+            "city" : "Miestas",
+            "street" : "gatve",
+            "number" : "12"
+         }]
      }
      
   PUT
@@ -52,13 +57,24 @@ Rest Endpoints:
      Pridėti header'i "Authorization : Bearer <TOKEN>"
   
     /shop/items/{id} -> atnaujinti prekės įrašą, id prekės numeris
-    {
-    "itemName": "NameUpdated",
-    "description": "description Update",
-    "countryOfManufactor" : "China",
-    "dateOfManufacturing" : "2017-03-30",
-    "price": 123
-    }
+      {
+        "itemName": "NameUpdated",
+        "description": "description Update",
+        "countryOfManufactor": "China",
+        "dateOfManufactor" : "2016-12-12",
+        "warehouses" : [
+        	{
+        		"city" : "Vilnius",
+        		"street" : "obelu",
+        		"number" : "12"
+        	},
+        		{
+        		"city" : "Kaunas",
+        		"street" : "laisves",
+        		"number" : "5"
+        	}
+        ]
+      }
     
   DELETE
 
