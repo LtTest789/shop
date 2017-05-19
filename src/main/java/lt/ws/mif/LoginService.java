@@ -5,5 +5,5 @@ package lt.ws.mif;
  */
 public interface LoginService {
 
-    boolean sendToken(String token);
+    boolean sendToken(String token) throws RandomExection;
 }

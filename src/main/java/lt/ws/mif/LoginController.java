@@ -21,7 +21,7 @@ import javax.validation.Valid;
 @RequestMapping(path = "/shop")
 public class LoginController {
 
-//    final String fooResourceUrl = "http://localhost:9003/login";
+//    final String fooResourceUrl = "http://localhost:9004/login";
     final String fooResourceUrl = "http://jwt:9003/login";
 
     @Autowired

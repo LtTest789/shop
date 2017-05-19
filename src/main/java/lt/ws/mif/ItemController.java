@@ -24,7 +24,7 @@ public class ItemController {
     private LoginService loginService;
 
     @RequestMapping(path = "/items", method = RequestMethod.POST)
-    public ResponseEntity<ItemState> add(@RequestBody @Valid ItemForm itemForm, HttpServletResponse response, HttpServletRequest request) throws TokenException {
+    public ResponseEntity<ItemState> add(@RequestBody @Valid ItemForm itemForm, HttpServletResponse response, HttpServletRequest request) throws TokenException, RandomExection {
         String header = request.getHeader("Authorization");
         if(loginService.sendToken(header)) {
             Operationresponse result = itemService.saveItem(itemForm);
@@ -38,7 +38,7 @@ public class ItemController {
     }
 
     @RequestMapping(path = "/items", method = RequestMethod.GET)
-    public ResponseEntity<List<ItemForm>> getAllItems(HttpServletRequest request) throws TokenException {
+    public ResponseEntity<List<ItemForm>> getAllItems(HttpServletRequest request) throws TokenException, RandomExection {
         String header = request.getHeader("Authorization");
         if(loginService.sendToken(header)){
             return new ResponseEntity<List<ItemForm>>(itemService.retrieveAllItems(), HttpStatus.OK);
@@ -47,7 +47,7 @@ public class ItemController {
     }
 
     @RequestMapping(path = "/items/{id}", method = RequestMethod.GET)
-    public ResponseEntity<?> getItemById(@PathVariable("id") Long itemId, HttpServletRequest request) throws TokenException {
+    public ResponseEntity<?> getItemById(@PathVariable("id") Long itemId, HttpServletRequest request) throws TokenException, RandomExection {
         String header = request.getHeader("Authorization");
         if(loginService.sendToken(header)) {
             ItemForm retrievedItem = itemService.retrieveItem(itemId);
@@ -60,7 +60,7 @@ public class ItemController {
     }
 
     @RequestMapping(path = "/items/{id}", method = RequestMethod.DELETE)
-    public ResponseEntity<ItemState> deleteItem(@PathVariable("id") Long itemId, HttpServletRequest request) throws TokenException {
+    public ResponseEntity<ItemState> deleteItem(@PathVariable("id") Long itemId, HttpServletRequest request) throws TokenException, RandomExection {
         String header = request.getHeader("Authorization");
         if(loginService.sendToken(header)) {
             if (itemService.deleteItem(itemId)) {
@@ -73,7 +73,7 @@ public class ItemController {
     }
 
     @RequestMapping(path = "/items/{id}", method = RequestMethod.PUT)
-    public ResponseEntity<ItemState> updateItem(@PathVariable("id") Long userId, @RequestBody @Valid ItemForm itemForm, HttpServletResponse response, HttpServletRequest request) throws TokenException {
+    public ResponseEntity<ItemState> updateItem(@PathVariable("id") Long userId, @RequestBody @Valid ItemForm itemForm, HttpServletResponse response, HttpServletRequest request) throws TokenException, RandomExection {
         String header = request.getHeader("Authorization");
         if(loginService.sendToken(header)) {
             Operationresponse result = itemService.updateItem(userId, itemForm);

@@ -5,6 +5,7 @@ import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
+import org.springframework.web.client.HttpServerErrorException;
 import org.springframework.web.client.RestOperations;
 
 /**
@@ -20,7 +21,7 @@ public class LoginServiceImpl implements LoginService {
     private RestOperations restTemplate;
 
     @Override
-    public boolean sendToken(String token) {
+    public boolean sendToken(String token) throws RandomExection {
         try {
 
             HttpHeaders headers = new HttpHeaders();
@@ -31,6 +32,8 @@ public class LoginServiceImpl implements LoginService {
                 return true;
             }
             return false;
+        } catch (HttpServerErrorException e) {
+           throw new RandomExection("Jwt Webservice down");
         } catch (Exception e) {
             return false;
         }

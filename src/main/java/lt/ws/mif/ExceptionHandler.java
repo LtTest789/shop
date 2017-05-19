@@ -22,4 +22,9 @@ public class ExceptionHandler {
     public ResponseEntity<Error> handle2(MethodArgumentNotValidException ex) {
         return new ResponseEntity<>(new Error("Wrong username or password!"), HttpStatus.BAD_REQUEST);
     }
+
+    @org.springframework.web.bind.annotation.ExceptionHandler(RandomExection.class)
+    public ResponseEntity<Error> handle3(RandomExection ex) {
+        return new ResponseEntity<>(new Error("JWT Webservice Down!"), HttpStatus.INTERNAL_SERVER_ERROR);
+    }
 }
